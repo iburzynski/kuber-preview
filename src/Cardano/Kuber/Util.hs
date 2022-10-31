@@ -6,7 +6,6 @@
 {-# LANGUAGE TupleSections #-}
 module Cardano.Kuber.Util
 (
-
     -- TypeCast/Conversion Utilities (Address/Pkh/SignKey)
       skeyToAddr
     , skeyToAddrInEra
@@ -16,8 +15,6 @@ module Cardano.Kuber.Util
     , addrToMaybePkh
     , addrInEraToPkh
     , addressInEraToPaymentKeyHash
-
-
     -- TypeCast/Conversion Utilities (PlutusTypes)
     , dataToScriptData
     , toPlutusAssetClass
@@ -30,7 +27,6 @@ module Cardano.Kuber.Util
     , toPlutusScriptHash
     , fromPlutusV1Script
     , fromPlutusV2Script
-
     -- Value utility and utxoto Value
     , isNullValue
     , valueLte
@@ -40,7 +36,6 @@ module Cardano.Kuber.Util
     , utxoSum
     , utxoMapSum
     , txoutListSum
-
     -- calculation functions
     , calculateTxoutMinLovelaceOrErr
     , calculateTxoutMinLovelace
@@ -54,14 +49,11 @@ module Cardano.Kuber.Util
     , queryUtxos
     , queryTxins
     , queryAddressInEraUtxos
-
     -- metadata utility
     , splitMetadataStrings
-
     -- wallet utilities
     , readSignKey
     , getDefaultSignKey
-
     -- text utilities
     , toHexString
     , unHex
@@ -151,7 +143,7 @@ calculateTxoutMinLovelace :: TxOut CtxTx  BabbageEra -> ProtocolParameters -> Ma
 calculateTxoutMinLovelace txout pParams=do
   case calculateMinimumUTxO ShelleyBasedEraBabbage txout pParams of
     Left mutoe -> Nothing
-    Right va -> pure $ (case selectAsset va AdaAssetId of { Quantity n -> Lovelace n })
+    Right va -> pure (case selectAsset va AdaAssetId of { Quantity n -> Lovelace n })
 
 
 babbageMinLovelace pparam txout = Ledger.evaluateMinLovelaceOutput pparam (toShelleyTxOut ShelleyBasedEraBabbage   txout)
